@@ -17,4 +17,4 @@ Stack:
 
 [Twitter](https://twitter.com/ianxingas)
 
-[Repositório](https://github.com/iancambrea/rinha-backend-python-sanic/)
+[Repositório](https://github.com/iancambrea/rinha-python-sanic)
