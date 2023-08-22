@@ -13,6 +13,7 @@ Stack:
 - PostgreSQL❤️ (banco de dados)
 - Redis (o cara da memória)
 - Nginx (balancer)
+- Cola quente e fita adesiva
 
 [Twitter](https://twitter.com/ianxingas)
 
