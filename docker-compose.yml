@@ -67,7 +67,7 @@ services:
     container_name: db
     volumes:
       - ./sql.sql:/docker-entrypoint-initdb.d/sql.sql
-    command: postgres -c shared_buffers=384MB -c max_connections=350 -c log_min_messages=FATAL
+    command: postgres -c shared_buffers=384MB -c max_connections=120 -c log_min_messages=FATAL
     deploy:
       resources:
         limits:

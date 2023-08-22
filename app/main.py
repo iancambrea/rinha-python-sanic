@@ -25,8 +25,8 @@ async def setup_pool(app, loop):
     global pool
     pool = AsyncConnectionPool(
         conninfo="postgresql://user:pass@db/rinha",
-        max_size=150,
-        min_size=150,
+        max_size=40,
+        min_size=40,
         max_idle=30,
     )
 
