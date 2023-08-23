@@ -56,6 +56,7 @@ async def create_pessoa(request: Request):
 
         await insert_queue.put(pessoa.model_dump())
         await cache.set(f"pessoa:{pessoa.id}", pessoa.model_dump_json())
+        await cache.set(f"apelido:{pessoa.apelido}", "True")
 
         return HTTPResponse(status=201, headers={"location": f"/pessoas/{pessoa.id}"})
 
