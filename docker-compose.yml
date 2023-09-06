@@ -1,12 +1,13 @@
 version: '3.5'
 services:
   api1:
-    image: iancambrea/rinha-python-sanic
+    # image: iancambrea/rinha-python-sanic
+    build: .
     hostname: api1
     depends_on:
       redis:
         condition: service_started
-      db: 
+      db:
         condition: service_healthy
     deploy:
       resources:
@@ -15,17 +16,18 @@ services:
           memory: '0.5GB'
     command: "sanic main:app -u='/tmp/api1.sock' --no-access-logs --single-process"
     volumes:
-      - ./apis.sock:/tmp/
+      - socks:/tmp
     networks:
       - appnet
 
   api2:
-    image: iancambrea/rinha-python-sanic
+    # image: iancambrea/rinha-python-sanic
+    build: .
     hostname: api1
     depends_on:
       redis:
         condition: service_started
-      db: 
+      db:
         condition: service_healthy
     deploy:
       resources:
@@ -34,7 +36,7 @@ services:
           memory: '0.5GB'
     command: "sanic main:app -u='/tmp/api2.sock' --no-access-logs --single-process"
     volumes:
-      - ./apis.sock:/tmp/
+      - socks:/tmp
     networks:
       - appnet
 
@@ -42,11 +44,11 @@ services:
     image: nginx:latest
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./apis.sock:/tmp/
+      - socks:/tmp
     depends_on:
       api1:
         condition: service_started
-      api2: 
+      api2:
         condition: service_started
     ports:
       - "9999:9999"
@@ -67,7 +69,7 @@ services:
     container_name: db
     volumes:
       - ./sql.sql:/docker-entrypoint-initdb.d/sql.sql
-    command: postgres -c shared_buffers=384MB -c max_connections=120 -c log_min_messages=FATAL
+    command: postgres -c shared_buffers=384MB -c max_connections=400 -c log_min_messages=FATAL
     deploy:
       resources:
         limits:
@@ -93,7 +95,10 @@ services:
         limits:
           cpus: '0.1'
           memory: '0.5GB'
-  
+
 networks:
   appnet:
     driver: bridge
+
+volumes:
+  socks:

@@ -18,6 +18,18 @@ COUNT_PESSOA_SQL = "SELECT count(*) FROM pessoa"
 
 
 app = Sanic("Rinha", loads=loads, dumps=dumps)
+class Cache:
+    def __init__(self):
+        self.pool = redis.ConnectionPool(host='redis', port=6379, db=0)
+
+    async def set(self, key, value):
+        client = redis.Redis(connection_pool=self.pool)
+        await client.set(key, value)
+
+    async def get(self, key):
+        client = redis.Redis(connection_pool=self.pool)
+        value = await client.get(key)
+        return value.decode('utf-8') if value else None
 
 
 @app.listener("before_server_start")
@@ -31,7 +43,7 @@ async def setup_pool(app, loop):
     )
 
     global cache
-    cache = redis.Redis(host="redis", port=6379, db=0)
+    cache = Cache()
 
 
 insert_queue = asyncio.Queue()
