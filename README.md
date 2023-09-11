@@ -4,7 +4,7 @@
 
 <h1 align="center"> 🐍 Rinha de Backend 🐍 </h1>
 
-This project was inspired by a community driven challenge that can be found <a href="https://github.com/zanfranceschi/rinha-de-backend-2023-q3">here</a>.   
+This project was produced for a participation in a community driven challenge that can be found <a href="https://github.com/zanfranceschi/rinha-de-backend-2023-q3">here</a>.   
 The main challenge idea is not the api itself, but the optimization to handle a stress test close to a ddos, using only 1.5 vCPU and 3GB of RAM.   
 This version does not attempt to be a production like code and does not apply much of good design standards, everything like that are a completely overengineering to the challenge propose.   
 The main features applied to increase performance was:   
