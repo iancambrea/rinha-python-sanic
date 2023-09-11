@@ -9,6 +9,7 @@ from orjson import loads, dumps
 from models import PessoaCreate
 from pydantic import ValidationError
 
+import os
 import asyncio
 
 WRITE_PESSOA_BATCH_SQL = "INSERT INTO pessoa (id, apelido, nome, nascimento, stack) VALUES (%(id)s, %(apelido)s, %(nome)s, %(nascimento)s, %(stack)s) ON conflict (apelido) do update set id = excluded.id, apelido = excluded.apelido, nome = excluded.nome, nascimento = excluded.nascimento, stack = excluded.stack"
@@ -20,7 +21,7 @@ COUNT_PESSOA_SQL = "SELECT count(*) FROM pessoa"
 app = Sanic("Rinha", loads=loads, dumps=dumps)
 class Cache:
     def __init__(self):
-        self.pool = redis.ConnectionPool(host='redis', port=6379, db=0)
+        self.pool = redis.ConnectionPool(host='localhost', port=6379, db=0)
 
     async def set(self, key, value):
         client = redis.Redis(connection_pool=self.pool)
@@ -36,7 +37,7 @@ class Cache:
 async def setup_pool(app, loop):
     global pool
     pool = AsyncConnectionPool(
-        conninfo="postgresql://user:pass@db/rinha",
+        conninfo="postgresql://user:pass@localhost/rinha",
         max_size=40,
         min_size=40,
         max_idle=30,
@@ -146,4 +147,4 @@ async def insert_into_db(persons):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=80, access_log=False)
+    app.run(host="0.0.0.0", port=int(os.getenv("PORT")), access_log=False)
