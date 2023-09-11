@@ -23,3 +23,6 @@ Stack:
 - PostgreSQL
 - Redis
 - Nginx
+
+results can be found here:   
+https://iancambrea.github.io/rinha-python-sanic/rinhabackendsimulation-20230823140802726/
