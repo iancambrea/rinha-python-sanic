@@ -2,20 +2,24 @@
   <img src="/gif/sanic.gif"/>
 </p>
 
-<h1 align="center"> 🐍 Rinha de Backend na linguagem da cobrinha 🐍 </h1>
+<h1 align="center"> 🐍 Rinha de Backend 🐍 </h1>
 <p align="center"><a href="https://github.com/zanfranceschi/rinha-de-backend-2023-q3">repositório da competicação</a></p>
 
-Decidi fazer em python pq não vi ninguém fazendo e a cobrinha merecia um representante, aproveitei pra aprender esse framework de nome engraçado no processo. Zero padrão de projeto, nada fancy e muitos crimes contra Alan Turing contidos no projeto.
+This project was inspired by a community driven challenge that can be found <a href="https://github.com/zanfranceschi/rinha-de-backend-2023-q3">here</a>.   
+The main challenge idea is not the api itself, but the optimization to handle a stress test close to a ddos, using only 1.5 vCPU and 3GB of RAM.   
+This version does not attempt to be a production like code and does not apply much of good design standards, everything like that are a completely overengineering to the challenge propose.   
+The main features applied to increase performance was:   
 
-Stack:
+- background task queue and bulk insert.   
+- cache for people queries.   
+- searcheable generated column and trigram index for 'like' query.   
+- unix socket connection between nginx and api's nodes.   
 
+it reached 21' position at challenge and 1' made in python.   
+
+Stack:   
 - Python
-- Sanic (framework web com nome engraçado)
-- PostgreSQL❤️ (banco de dados)
-- Redis (o cara da memória)
-- Nginx (balancer)
-- Cola quente e fita adesiva
-
-[Twitter](https://twitter.com/ianxingas)
-
-[Repositório](https://github.com/iancambrea/rinha-python-sanic)
+- Sanic
+- PostgreSQL
+- Redis
+- Nginx
