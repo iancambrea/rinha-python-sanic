@@ -9,7 +9,7 @@ The main challenge idea is not the api itself, but the optimization to handle a 
 This version does not attempt to be a production like code and does not apply much of good design standards, everything like that are a completely overengineering to the challenge propose.   
 The main features applied to increase performance was:   
 
-- background task queue and bulk insert.   
+- background task queue and bulk insert to creation endpoint.   
 - cache for people queries.   
 - searcheable generated column and trigram index for 'like' query.   
 - unix socket connection between nginx and api's nodes.   
